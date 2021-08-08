@@ -21,6 +21,7 @@ clientsClaim();
 // even if you decide not to use precaching. See https://cra.link/PWA
 precacheAndRoute(self.__WB_MANIFEST);
 
+// CACHE CODE
 // Set up App Shell-style routing, so that all navigation requests
 // are fulfilled with your index.html shell. Learn more at
 // https://developers.google.com/web/fundamentals/architecture/app-shell
@@ -46,14 +47,16 @@ registerRoute(
   createHandlerBoundToURL(process.env.PUBLIC_URL + "/index.html")
 );
 
+// CACHE IMG
 // An example runtime caching route for requests that aren't handled by the
 // precache, in this case same-origin .png requests like those from in public/
 registerRoute(
   // Add in any other file extensions or routing criteria as needed.
   ({ url }) =>
-    url.origin === self.location.origin && url.pathname.endsWith(".png"), // Customize this strategy as needed, e.g., by changing to CacheFirst.
+    url.origin === self.location.origin &&
+    /\.(jpe?g|png|svg|ico)$/i.test(url.pathname), // Customize this strategy as needed, e.g., by changing to CacheFirst.
   new StaleWhileRevalidate({
-    cacheName: "images",
+    cacheName: "img",
     plugins: [
       // Ensure that once this runtime cache reaches a maximum size the
       // least-recently used images are removed.
