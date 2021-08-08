@@ -11,7 +11,7 @@ import { clientsClaim } from "workbox-core";
 import { ExpirationPlugin } from "workbox-expiration";
 import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
-import { StaleWhileRevalidate } from "workbox-strategies";
+import { StaleWhileRevalidate, NetworkFirst } from "workbox-strategies";
 
 clientsClaim();
 
@@ -65,6 +65,27 @@ registerRoute(
   })
 );
 
+// CACHE CDN
+// An example runtime caching route for requests that aren't handled by the
+// precache, in this case same-origin .png requests like those from in public/
+registerRoute(
+  // Add in any other file extensions or routing criteria as needed.
+  ({ url }) =>
+    url.origin === "https://fonts.googlepais.com" ||
+    url.origin === "https://fonts.gstatic.com", // Customize this strategy as needed, e.g., by changing to CacheFirst.
+  new NetworkFirst({
+    cacheName: "fonts",
+    plugins: [
+      // Ensure that once this runtime cache reaches a maximum size the
+      // least-recently used images are removed.
+      new ExpirationPlugin({
+        maxAgeSeconds: 60 * 60 * 24 * 356,
+        maxEntries: 30,
+      }),
+    ],
+  })
+);
+
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
 self.addEventListener("message", (event) => {
@@ -74,3 +95,14 @@ self.addEventListener("message", (event) => {
 });
 
 // Any other custom service worker logic can go here.
+self.addEventListener("install", (event) => {
+  console.log("SW Install");
+  const asyncInstall = new Promise((resolve) => {
+    console.log("Await install");
+    setTimeout(resolve, 5000);
+  });
+  event.waitUntil(asyncInstall);
+});
+self.addEventListener("activate", (event) => {
+  console.log("SW Activate");
+});

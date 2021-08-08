@@ -272,7 +272,7 @@ module.exports = {
       DEFAULT: "1",
     },
     fontFamily: {
-      sans: ["Open Sans"],
+      sans: ['"Josefin Sans"'],
       serif: [
         "ui-serif",
         "Georgia",
