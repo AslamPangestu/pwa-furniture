@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Header from "./components/Layouts/Header";
 import Footer from "./components/Layouts/Footer";
 import SideMenu from "./components/Layouts/SideMenu";
@@ -10,13 +10,13 @@ import Clients from "./components/Clients";
 function App() {
   return (
     <div className="App">
-      <Header/>
-      <Hero/>
-      <Browse/>
-      <Arrived/>
-      <Clients/>
-      <SideMenu/>
-      <Footer/>
+      <Header />
+      <Hero />
+      <Browse />
+      <Arrived />
+      <Clients />
+      <SideMenu />
+      <Footer />
     </div>
   );
 }

@@ -1,8 +1,9 @@
-import { useEffect } from "react";
-// import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { numberFormat } from "../utils";
 
-function Arrived({ items }) {
+const Arrived = ({ items }) => {
   useEffect(function () {}, []);
   return (
     <section className="flex flex-col py-16">
@@ -48,13 +49,13 @@ function Arrived({ items }) {
                   </div>
                   <h5 className="text-lg font-semibold mt-4">{item.name}</h5>
                   <span className="">{numberFormat(item.price)}</span>
-                  {/* <Link
+                  <Link
                     to={{
                       pathname: `details/${item.id}`,
                       state: item,
                     }}
                     className="stretched-link"
-                  /> */}
+                  />
                 </div>
               );
             })}
@@ -62,6 +63,10 @@ function Arrived({ items }) {
       </div>
     </section>
   );
-}
+};
+
+Arrived.propTypes = {
+  items: PropTypes.array,
+};
 
 export default Arrived;
