@@ -6,13 +6,24 @@ import Hero from "./components/Hero";
 import Browse from "./components/Browse";
 import Arrived from "./components/Arrived";
 import Clients from "./components/Clients";
+import Offline from "./components/Offline";
 
 function App() {
   const [items, setItems] = useState([]);
+  const [offlineStatus, setOfflineStatus] = useState(!navigator.onLine);
 
   useEffect(() => {
     getItems();
-  }, []);
+    checkOnlineStatus();
+    return () => {
+      window.removeEventListener("online", offlineStatusHandler);
+      window.removeEventListener("offline", offlineStatusHandler);
+    };
+  }, [offlineStatus]);
+
+  const offlineStatusHandler = () => {
+    setOfflineStatus(!navigator.onLine);
+  };
 
   const getItems = async () => {
     const response = await fetch(
@@ -31,14 +42,25 @@ function App() {
     // setTimeout(function () {
     //   setIsLoading(false);
     // }, 1500);
-
-    // const script = document.createElement("script");
-    // script.src = "/carousel.js";
-    // script.async = false;
-    // document.body.appendChild(script);
+    initCarousel();
   };
+
+  const initCarousel = () => {
+    const script = document.createElement("script");
+    script.src = "/carousel.js";
+    script.async = false;
+    document.body.appendChild(script);
+  };
+
+  const checkOnlineStatus = () => {
+    offlineStatusHandler();
+    window.addEventListener("online", offlineStatusHandler);
+    window.addEventListener("offline", offlineStatusHandler);
+  };
+
   return (
     <div className="App">
+      {offlineStatus && <Offline />}
       <Header />
       <Hero />
       <Browse />
