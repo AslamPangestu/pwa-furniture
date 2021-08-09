@@ -7,10 +7,12 @@ import Browse from "./components/Browse";
 import Arrived from "./components/Arrived";
 import Clients from "./components/Clients";
 import Offline from "./components/Offline";
+import SplashScreen from "./pages/Splash";
 
 function App() {
   const [items, setItems] = useState([]);
   const [offlineStatus, setOfflineStatus] = useState(!navigator.onLine);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getItems();
@@ -39,9 +41,7 @@ function App() {
     const { nodes } = await response.json();
     setItems(nodes);
 
-    // setTimeout(function () {
-    //   setIsLoading(false);
-    // }, 1500);
+    splashHandler();
     initCarousel();
   };
 
@@ -58,16 +58,28 @@ function App() {
     window.addEventListener("offline", offlineStatusHandler);
   };
 
+  const splashHandler = () => {
+    setTimeout(function () {
+      setIsLoading(false);
+    }, 1500);
+  };
+
   return (
     <div className="App">
-      {offlineStatus && <Offline />}
-      <Header />
-      <Hero />
-      <Browse />
-      <Arrived items={items} />
-      <Clients />
-      <SideMenu />
-      <Footer />
+      {isLoading ? (
+        <SplashScreen />
+      ) : (
+        <>
+          {offlineStatus && <Offline />}
+          <Header />
+          <Hero />
+          <Browse />
+          <Arrived items={items} />
+          <Clients />
+          <SideMenu />
+          <Footer />
+        </>
+      )}
     </div>
   );
 }
