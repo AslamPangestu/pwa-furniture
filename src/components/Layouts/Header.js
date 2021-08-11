@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Menu from "./Menu.js";
 
-const Header = ({ carts, currentPage }) => {
+const Header = ({ carts, mode, menus }) => {
   return (
     <header
-      className={`${currentPage !== "details" && "absolute"} w-full z-50 px-4`}
+      className={`${mode === "light" ? "absolute" : ""} w-full z-50 px-4`}
     >
       <div className="container mx-auto py-5">
         <div className="flex flex-stretch items-center">
@@ -19,7 +19,7 @@ const Header = ({ carts, currentPage }) => {
             </Link>
           </div>
           <div className="w-full"></div>
-          <Menu currentPage={currentPage} carts={carts} />
+          <Menu mode={mode} carts={carts} menus={menus} />
         </div>
       </div>
     </header>
@@ -27,8 +27,9 @@ const Header = ({ carts, currentPage }) => {
 };
 
 Header.propTypes = {
+  mode: PropTypes.string,
   carts: PropTypes.array,
-  currentPage: PropTypes.array,
+  menus: PropTypes.array,
 };
 
 export default Header;

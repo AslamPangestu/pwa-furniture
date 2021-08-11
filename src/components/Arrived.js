@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import ArrivedItem from "./ArrivedItem";
 
 const Arrived = ({ items }) => {
-  useEffect(function () {}, []);
   return (
     <section className="flex flex-col py-16">
       <div className="container mx-auto mb-4">

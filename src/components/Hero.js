@@ -2,12 +2,12 @@ import React, { useState } from "react";
 
 import Modal from "./Modal.js";
 
-function Hero() {
+const Hero = () => {
   const [showModal, setShowModal] = useState(false);
 
-  function handleShowModal() {
+  const handleShowModal = () => {
     setShowModal(!showModal);
-  }
+  };
   return (
     <section className="flex items-center hero">
       <div className="w-full absolute z-20 inset-0 md:relative md:w-1/2 text-center flex flex-col justify-center hero-caption">
@@ -49,6 +49,6 @@ function Hero() {
       {showModal && <Modal handleShowModal={handleShowModal} />}
     </section>
   );
-}
+};
 
 export default Hero;

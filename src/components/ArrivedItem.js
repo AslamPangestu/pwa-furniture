@@ -35,7 +35,7 @@ const ArrivedItem = ({ item }) => {
       <span className="">{numberFormat(item.price)}</span>
       <Link
         to={{
-          pathname: `details/${item.id}`,
+          pathname: `products/${item.id}`,
           state: item,
         }}
         className="stretched-link"

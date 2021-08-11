@@ -2,9 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const Menu = ({ carts, currentPage }) => {
-  let textColor = "md:text-white";
-  if (currentPage === "details") textColor = "md:text-black";
+const Menu = ({ mode, carts, menus }) => {
   return (
     <>
       <div className="w-auto">
@@ -12,29 +10,18 @@ const Menu = ({ carts, currentPage }) => {
           className="fixed bg-white inset-0 flex flex-col invisible items-center justify-center opacity-0 md:visible md:flex-row md:bg-transparent md:relative md:opacity-100 md:flex md:items-center"
           id="menu"
         >
-          <li className="mx-3 py-6 md:py-0">
-            <a href="#" className={`text-black ${textColor} hover:underline`}>
-              Showcase
-            </a>
-          </li>
-          <li className="mx-3 py-6 md:py-0">
-            <a href="#" className={`text-black ${textColor} hover:underline`}>
-              Catalog
-            </a>
-          </li>
-          <li className="mx-3 py-6 md:py-0">
-            <a href="#" className={`text-black ${textColor} hover:underline`}>
-              Delivery
-            </a>
-          </li>
-          <li className="mx-3 py-6 md:py-0">
-            <Link
-              to="/profile"
-              className={`text-black ${textColor} hover:underline`}
-            >
-              Profile
-            </Link>
-          </li>
+          {menus.map((item, idx) => (
+            <li key={idx} className="mx-3 py-6 md:py-0">
+              <Link
+                to={item.link}
+                className={`text-black ${
+                  mode === "light" ? "md:text-white" : "md:text-black"
+                } hover:underline`}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
       <div className="w-auto">
@@ -69,7 +56,9 @@ const Menu = ({ carts, currentPage }) => {
           <li className="ml-6">
             <Link
               id="header-carts"
-              className={`flex items-center justify-center w-8 h-8 text-black ${textColor}`}
+              className={`flex items-center justify-center w-8 h-8 text-black ${
+                mode === "light" ? "md:text-white" : "md:text-black"
+              }`}
               to="/carts"
             >
               <svg
@@ -103,8 +92,9 @@ const Menu = ({ carts, currentPage }) => {
 };
 
 Menu.propTypes = {
+  mode: PropTypes.string,
   carts: PropTypes.array,
-  currentPage: PropTypes.string,
+  menus: PropTypes.array,
 };
 
 export default Menu;

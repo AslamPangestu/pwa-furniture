@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import Header from "../components/Layouts/Header";
 import Footer from "../components/Layouts/Footer";
 import SideMenu from "../components/Layouts/SideMenu";
@@ -9,7 +10,13 @@ import Clients from "../components/Clients";
 import Offline from "../components/Offline";
 import SplashScreen from "./Splash";
 
-function App() {
+const Home = ({ cart }) => {
+  const HEADER_MENUS = [
+    { label: "Showcase", link: "/showcases" },
+    { label: "Catalog", link: "/catalogs" },
+    { label: "Delivery", link: "/deliveries" },
+    { label: "Profile", link: "/profile" },
+  ];
   const [items, setItems] = useState([]);
   const [offlineStatus, setOfflineStatus] = useState(!navigator.onLine);
   const [isLoading, setIsLoading] = useState(true);
@@ -70,7 +77,7 @@ function App() {
       ) : (
         <>
           {offlineStatus && <Offline />}
-          <Header />
+          <Header mode="light" carts={cart} menus={HEADER_MENUS} />
           <Hero />
           <Browse />
           <Arrived items={items} />
@@ -81,6 +88,10 @@ function App() {
       )}
     </div>
   );
-}
+};
 
-export default App;
+Home.propTypes = {
+  cart: PropTypes.array,
+};
+
+export default Home;
