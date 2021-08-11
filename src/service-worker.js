@@ -140,6 +140,16 @@ self.addEventListener("install", (event) => {
   });
   event.waitUntil(asyncInstall);
 });
+
 self.addEventListener("activate", (event) => {
   console.log("SW Activate");
+});
+
+self.addEventListener("push", (event) => {
+  event.waitUntil(
+    self.registration.showNotification("Furniture PWA", {
+      icon: "./icon-120.png",
+      body: event.data.text(),
+    })
+  );
 });
