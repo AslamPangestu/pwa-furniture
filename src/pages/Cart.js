@@ -68,7 +68,7 @@ const Cart = ({ cart, handleRemoveCartItem }) => {
               )}
 
               {cart.length > 0 &&
-                cart.map(function ({ id, item }, index) {
+                cart.map(({ id, item }, index) => {
                   return (
                     <div
                       key={index}
@@ -110,6 +110,7 @@ const Cart = ({ cart, handleRemoveCartItem }) => {
                       <div className="px-4 w-2/12">
                         <div className="text-center">
                           <button
+                            name={`removeCart${id}`}
                             onClick={(event) => handleRemoveCartItem(event, id)}
                             className="text-red-600 border-none focus:outline-none px-3 py-1"
                           >
@@ -187,6 +188,7 @@ const Cart = ({ cart, handleRemoveCartItem }) => {
                     <div className="flex -mx-2 flex-wrap">
                       <div className="px-2 w-6/12 h-24 mb-4">
                         <button
+                          name="courierFedex"
                           type="button"
                           data-value="fedex"
                           data-name="courier"
@@ -201,6 +203,7 @@ const Cart = ({ cart, handleRemoveCartItem }) => {
                       </div>
                       <div className="px-2 w-6/12 h-24 mb-4">
                         <button
+                          name="courierDhl"
                           type="button"
                           data-value="dhl"
                           data-name="courier"
@@ -223,6 +226,7 @@ const Cart = ({ cart, handleRemoveCartItem }) => {
                     <div className="flex -mx-2 flex-wrap">
                       <div className="px-2 w-6/12 h-24 mb-4">
                         <button
+                          name="courierMidtrans"
                           type="button"
                           data-value="midtrans"
                           data-name="payment"
@@ -238,6 +242,7 @@ const Cart = ({ cart, handleRemoveCartItem }) => {
                       <div className="px-2 w-6/12 h-24 mb-4">
                         <button
                           type="button"
+                          name="courierMastercard"
                           data-value="mastercard"
                           data-name="payment"
                           className="border border-gray-200 focus:border-red-200 flex items-center justify-center rounded-xl bg-white w-full h-full focus:outline-none"
@@ -251,6 +256,7 @@ const Cart = ({ cart, handleRemoveCartItem }) => {
                       <div className="px-2 w-6/12 h-24 mb-4">
                         <button
                           type="button"
+                          name="courierBitcoin"
                           data-value="bitcoin"
                           data-name="payment"
                           className="border border-gray-200 focus:border-red-200 flex items-center justify-center rounded-xl bg-white w-full h-full focus:outline-none"
@@ -264,6 +270,7 @@ const Cart = ({ cart, handleRemoveCartItem }) => {
                       </div>
                       <div className="px-2 w-6/12 h-24 mb-4">
                         <button
+                          name="courierAE"
                           type="button"
                           data-value="american-express"
                           data-name="payment"
@@ -279,6 +286,7 @@ const Cart = ({ cart, handleRemoveCartItem }) => {
                   </div>
                   <div className="text-center">
                     <button
+                      name="checkout"
                       type="submit"
                       disabled
                       className="bg-pink-400 text-black hover:bg-black hover:text-pink-400 focus:outline-none w-full py-3 rounded-full text-lg focus:text-black transition-all duration-200 px-6"

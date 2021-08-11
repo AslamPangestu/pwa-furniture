@@ -28,6 +28,7 @@ const Menu = ({ mode, carts, menus }) => {
         <ul className="items-center flex">
           <li className="ml-6 block md:hidden">
             <button
+              name="showCart"
               id="menu-toggler"
               className="relative flex z-50 items-center justify-center w-8 h-8 text-black md:text-white focus:outline-none"
             >

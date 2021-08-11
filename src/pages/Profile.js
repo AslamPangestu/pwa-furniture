@@ -51,6 +51,7 @@ const Profile = ({ cart }) => {
             <li className="pb-3 mb-2 flex items-center justify-between w-full border-b border-gray-100">
               <span>Subscribe to Notification</span>
               <button
+                name="subscribe"
                 className="hover:underline appearance-none"
                 onClick={subscribe}
               >
@@ -59,7 +60,10 @@ const Profile = ({ cart }) => {
             </li>
             <li className="pb-3 mb-2 flex items-center justify-between w-full border-b border-gray-100">
               <span>Test Notification</span>
-              <button className="hover:underline appearance-none">
+              <button
+                name="notification"
+                className="hover:underline appearance-none"
+              >
                 Push Now
               </button>
             </li>

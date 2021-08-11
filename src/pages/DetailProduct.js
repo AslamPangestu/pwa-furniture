@@ -127,6 +127,7 @@ const DetailProduct = ({ cart, handleAddToCart }) => {
             <p className="text-xl">{numberFormat(price)}</p>
 
             <button
+              name="addToCart"
               onClick={() => handleAddToCart(location.state)}
               className="transition-all duration-200 bg-pink-400 text-black focus:bg-black focus:text-pink-400 rounded-full px-8 py-3 mt-4 inline-flex"
             >
